@@ -1,8 +1,8 @@
 import statusList from "../../utils/statusList";
 import Column from "../column/Column";
-import cardList from "../../utils/cardList";
+import PropTypes from 'prop-types';
 
-function Main() {
+function Main({taskList}) {
   return (
     <main className="main">
       <div className="container">
@@ -12,7 +12,7 @@ function Main() {
               <Column
                 key={status}
                 status={status}
-                cards={cardList.filter(card => card.status.toLowerCase() === status.toLowerCase())}
+                cards={taskList.filter(card => card.status.toLowerCase() === status.toLowerCase())}
               />
             ))}
           </div>
@@ -21,5 +21,9 @@ function Main() {
     </main>
   );
 }
+
+Main.propTypes = {
+  taskList: PropTypes.array.isRequired
+};
 
 export default Main;
