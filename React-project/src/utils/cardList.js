@@ -1,0 +1,81 @@
+const cardList = [
+    {
+      cardId: 1,
+      cardTitle: "Название задачи",
+      cardGroup: "Web Design",
+      cartDate: "30.10.23",
+      column: "Без статуса",
+    },
+    {
+      cardId: 2,
+      cardTitle: "Название задачи",
+      cardGroup: "Research",
+      cartDate: "30.10.23",
+      column: "Без статуса",
+    },
+    {
+      cardId: 3,
+      cardTitle: "Название задачи",
+      cardGroup: "Web Design",
+      cartDate: "30.10.23",
+      column: "Без статуса",
+    },
+    {
+      cardId: 4,
+      cardTitle: "Название задачи",
+      cardGroup: "Copywriting",
+      cartDate: "30.10.23",
+      column: "Без статуса",
+    },
+    {
+      cardId: 5,
+      cardTitle: "Название задачи",
+      cardGroup: "Web Design",
+      cartDate: "30.10.23",
+      column: "Без статуса",
+    },
+    {
+      cardId: 6,
+      cardTitle: "Название задачи",
+      cardGroup: "Research",
+      cartDate: "30.10.23",
+      column: "НУЖНО СДЕЛАТЬ",
+    },
+    {
+      cardId: 7,
+      cardTitle: "Название задачи",
+      cardGroup: "Research",
+      cartDate: "30.10.23",
+      column: "В РАБОТЕ",
+    },
+    {
+      cardId: 8,
+      cardTitle: "Название задачи",
+      cardGroup: "Copywriting",
+      cartDate: "30.10.23",
+      column: "В РАБОТЕ",
+    },
+    {
+      cardId: 9,
+      cardTitle: "Название задачи",
+      cardGroup: "Web Design",
+      cartDate: "30.10.23",
+      column: "В РАБОТЕ",
+    },
+    {
+      cardId: 10,
+      cardTitle: "Название задачи",
+      cardGroup: "Research",
+      cartDate: "30.10.23",
+      column: "ТЕСТИРОВАНИЕ",
+    },
+    {
+      cardId: 11,
+      cardTitle: "Название задачи",
+      cardGroup: "Research",
+      cartDate: "30.10.23",
+      column: "ГОТОВО",
+    },
+  ];
+
+  export default cardList
