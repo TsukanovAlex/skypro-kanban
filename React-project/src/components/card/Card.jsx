@@ -1,12 +1,15 @@
+
 import PropTypes from "prop-types";
 
-function Card(props) {
+function Card({ card }) {
+  const { theme, title, date } = card;
+
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
           <div className="card__theme _orange">
-            <p className="_orange">{props.theme}</p>
+            <p className="_orange">{theme}</p>
           </div>
           <a href="#popBrowse" target="_self">
             <div className="card__btn">
@@ -18,7 +21,7 @@ function Card(props) {
         </div>
         <div className="card__content">
           <a href="" target="_blank">
-            <h3 className="card__title">{props.content}</h3>
+            <h3 className="card__title">{title}</h3>
           </a>
           <div className="card__date">
             <svg
@@ -49,7 +52,7 @@ function Card(props) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{props.date}</p>
+            <p>{date}</p>
           </div>
         </div>
       </div>
@@ -58,8 +61,11 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  theme: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  card: PropTypes.shape({
+    theme: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
+  }).isRequired
 };
+
 export default Card;
