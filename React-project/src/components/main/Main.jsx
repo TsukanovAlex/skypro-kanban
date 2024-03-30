@@ -2,19 +2,22 @@ import statusList from "../../utils/statusList";
 import Column from "../column/Column";
 import PropTypes from 'prop-types';
 
-function Main({taskList}) {
+function Main({taskList, isLoading}) {
   return (
     <main className="main">
       <div className="container">
         <div className="main__block">
           <div className="main__content">
-            {statusList.map(status => (
+            {
+              isLoading? "Данные загружаются" : <>
+              {statusList.map(status => (
               <Column
                 key={status}
                 status={status}
                 cards={taskList.filter(card => card.status.toLowerCase() === status.toLowerCase())}
               />
-            ))}
+            ))}</>
+            }
           </div>
         </div>
       </div>
@@ -23,7 +26,8 @@ function Main({taskList}) {
 }
 
 Main.propTypes = {
-  taskList: PropTypes.array.isRequired
+  taskList: PropTypes.array.isRequired,
+  isLoading: PropTypes.array.isRequired
 };
 
 export default Main;
