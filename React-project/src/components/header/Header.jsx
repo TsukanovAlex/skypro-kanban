@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
 import PopUser from "../popups/PopUser/PopUser";
+import * as S from './Header.styled';
+import { Container } from '../../styles/shared.styled';
 
 function Header({ cardList, setCardList }) {
   const [isOpen, setOpen] = useState(false);
@@ -21,23 +23,23 @@ function Header({ cardList, setCardList }) {
   }
 
   return (
-    <header className="header">
-      <div className="container">
-        <div className="header__block">
-          <div className="header__logo _show _light">
+    <S.Header>
+      <Container>
+        <S.HeaderBlock>
+          <S.HeaderLogo>
             <a href="/" target="_self">
               <img src="../public/images/logo.png" alt="logo" />
             </a>
-          </div>
-          <div className="header__logo _dark">
+          </S.HeaderLogo>
+          <S.HeaderLogoDark>
             <a href="/" target="_self">
               <img src="images/logo_dark.png" alt="logo" />
             </a>
-          </div>
-          <nav className="header__nav">
-            <button onClick={onClick} className="header__btn-main-new _hover01" id="btnMainNew">
+          </S.HeaderLogoDark>
+          <S.HeaderNav>
+            <S.HeaderBtn onClick={onClick} >
               Создать новую задачу
-            </button>
+            </S.HeaderBtn>
             <a
               onClick={openUser}
               href="#user-set-target"
@@ -45,12 +47,12 @@ function Header({ cardList, setCardList }) {
             >
               Ivan Ivanov
             </a>
-          </nav>
-        </div>
-      </div>
+          </S.HeaderNav>
+        </S.HeaderBlock>
+      </Container>
 
       {isOpen && <PopUser />}
-    </header>
+    </S.Header>
   );
 }
 
