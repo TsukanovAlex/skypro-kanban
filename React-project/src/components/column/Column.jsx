@@ -1,25 +1,25 @@
-
 import Card from "../card/Card";
 import PropTypes from "prop-types";
+import * as S from "../column/Column.styled";
 
 function Column({ status, cards }) {
   return (
-    <div className="main__column column">
-      <div className="column__title">
+    <S.MainColumn>
+      <S.ColumnTitle>
         <p>{status}</p>
-      </div>
-      <div className="cards">
-        {cards.map(card => (
+      </S.ColumnTitle>
+      <S.Cards>
+        {cards.map((card) => (
           <Card key={card.id} card={card} />
         ))}
-      </div>
-    </div>
+      </S.Cards>
+    </S.MainColumn>
   );
 }
 
 Column.propTypes = {
   status: PropTypes.string.isRequired,
-  cards: PropTypes.array.isRequired
+  cards: PropTypes.array.isRequired,
 };
 
 export default Column;

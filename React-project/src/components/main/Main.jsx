@@ -1,25 +1,41 @@
+import { Container } from "../../styles/shared.styled";
 import statusList from "../../utils/statusList";
 import Column from "../column/Column";
-import cardList from "../../utils/cardList";
+import PropTypes from "prop-types";
+import * as S from "../main/main.styled";
 
-function Main() {
+function Main({ taskList, isLoading }) {
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
-            {statusList.map(status => (
-              <Column
-                key={status}
-                status={status}
-                cards={cardList.filter(card => card.status.toLowerCase() === status.toLowerCase())}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </main>
+    <S.Main>
+      <Container>
+        <S.MainBlock>
+          <S.MainContent>
+            {isLoading ? (
+              "Данные загружаются"
+            ) : (
+              <>
+                {statusList.map((status) => (
+                  <Column
+                    key={status}
+                    status={status}
+                    cards={taskList.filter(
+                      (card) =>
+                        card.status.toLowerCase() === status.toLowerCase()
+                    )}
+                  />
+                ))}
+              </>
+            )}
+          </S.MainContent>
+        </S.MainBlock>
+      </Container>
+    </S.Main>
   );
 }
+
+Main.propTypes = {
+  taskList: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default Main;
