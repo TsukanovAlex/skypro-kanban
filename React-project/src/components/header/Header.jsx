@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
 import PopUser from "../popups/PopUser/PopUser";
-import * as S from './Header.styled';
+import * as S from './header.styled';
 import { Container } from '../../styles/shared.styled';
 
 function Header({ cardList, setCardList }) {

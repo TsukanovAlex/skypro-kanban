@@ -1,6 +1,6 @@
 import Card from "../card/Card";
 import PropTypes from "prop-types";
-import * as S from "../column/Column.styled";
+import * as S from "./column.styled";
 
 function Column({ status, cards }) {
   return (

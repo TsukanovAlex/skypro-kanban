@@ -16,3 +16,12 @@ export const topicStyles = {
       color: "#ffffff",
     },
   };
+
+  export const paths = {
+    MAIN: "/",
+    CARD: "/card/:id",
+    LOGIN: "/login",
+    EXIT: "/exit",
+    REGISTER: "/register",
+    NOT_FOUND: "*"
+  }
