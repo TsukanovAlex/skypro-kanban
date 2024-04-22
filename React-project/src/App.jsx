@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import cardList from "./utils/cardList";
 import { GlobalStyle } from "./styles/global.styled";
 import { Wrapper } from "./styles/shared.styled";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 
 
@@ -29,6 +31,8 @@ function App() {
         <PopBrowse />
         <Header setCardList={setCardList} cardList={cardList} />
         <Main taskList={taskList} isLoading={isLoading} />
+        <Login/>
+        <Register/>
       </Wrapper>
       </>
   );
