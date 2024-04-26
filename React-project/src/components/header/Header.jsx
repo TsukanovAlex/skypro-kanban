@@ -21,7 +21,6 @@ function Header({ cardList, setCardList }) {
       date: "30.10.23",
       status: "Без статуса",
     };
-    console.log("Adding new card:", newCard); // Проверяем, что создается новая задача
     setCardList([...cardList, newCard]);
   }
 

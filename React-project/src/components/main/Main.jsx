@@ -23,7 +23,7 @@ export function Main({ taskList, isLoading }) {
                   <Column
                     key={status}
                     status={status}
-                    cards={cardList.filter( // Заменяем taskList на cardList здесь
+                    cards={cardList.filter( 
                       (card) =>
                         card.status.toLowerCase() === status.toLowerCase()
                     )}

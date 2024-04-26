@@ -17,7 +17,7 @@ export const AppRoutes = () => {
       <Route path={paths.MAIN} element={<PrivateRoutes isAuth={isAuth} />}>
         <Route index element={<MainPage />} />
         <Route path={paths.CARD} element={<CardPage />} />
-        <Route path={paths.EXIT} element={<ExitPage />} />
+        <Route path={paths.EXIT} element={<ExitPage setIsAuth={setIsAuth}/>} />
       </Route>
       <Route path={paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth}/>} />
       <Route path={paths.REGISTER} element={<RegisterPage />} />
