@@ -9,7 +9,7 @@ export const WrapperSignin = styled.div`
   background-color: #eaeef6;
 `;
 export const ContainerSignin = styled.div`
-  display: none;
+  display: block;
   width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
@@ -53,7 +53,12 @@ export const ModalFormLogin = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   & input:first-child {
+    margin-bottom: 7px;
+  }
+
+  & input:nth-child(2) {
     margin-bottom: 7px;
   }
 `;

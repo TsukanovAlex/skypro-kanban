@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import * as S from "../PopExit/popExit.styled"
+import { paths } from "../../../lib/topic"
 
 
 function PopExit(){
@@ -14,10 +15,10 @@ function PopExit(){
       
           <S.popExitForm>
             <S.ButtonExitYes>
-              <Link to="/login">Да, выйти</Link>
+              <Link to={paths.LOGIN}>Да, выйти</Link>
             </S.ButtonExitYes>
             <S.ButtonExitNo>
-              <Link to="/">Нет, остаться</Link>{" "}
+              <Link to={paths.MAIN}>Нет, остаться</Link> 
             </S.ButtonExitNo>
           </S.popExitForm>
   
