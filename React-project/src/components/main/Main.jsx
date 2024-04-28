@@ -11,8 +11,9 @@ export function Main({ taskList, isLoading }) {
 
   return (
     <S.Main>
+      <Header cardList={cardList} setCardList={setCardList} />
       <Container>
-        <Header cardList={cardList} setCardList={setCardList} />
+        
         <S.MainBlock>
           <S.MainContent>
             {isLoading ? (

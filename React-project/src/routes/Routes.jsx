@@ -1,4 +1,4 @@
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import ExitPage from "../pages/ExitPage";
 import LoginPage from "../pages/LoginPage";
@@ -15,11 +15,15 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path={paths.MAIN} element={<PrivateRoutes isAuth={isAuth} />}>
-        <Route index element={<MainPage />} />
-        <Route path={paths.CARD} element={<CardPage />} />
-        <Route path={paths.EXIT} element={<ExitPage setIsAuth={setIsAuth}/>} />
+        <Route path={paths.MAIN} element={<MainPage />}>
+          <Route path={paths.CARD} element={<CardPage />} />
+          <Route
+            path={paths.EXIT}
+            element={<ExitPage setIsAuth={setIsAuth} />}
+          />
+        </Route>
       </Route>
-      <Route path={paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth}/>} />
+      <Route path={paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} />} />
       <Route path={paths.REGISTER} element={<RegisterPage />} />
       <Route path={paths.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
