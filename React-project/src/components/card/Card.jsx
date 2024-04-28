@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import * as S from "../card/card.styled";
+import { Link } from "react-router-dom";
 
 function Card({ card }) {
-  const { title, date, theme } = card;
+  const { title, date, theme, id } = card;
 
   const getClassName = (title) => {
     switch (title.toLowerCase()) {
@@ -24,18 +25,16 @@ function Card({ card }) {
           <S.CardTheme $theme={getClassName(card.theme.toLowerCase())}>
             <p>{theme}</p>
           </S.CardTheme>
-          <a href="#popBrowse" target="_self">
+          <Link to={`/card/${String(id)}`}>
             <S.CardBtn>
               <S.CardBtnDiv />
               <S.CardBtnDiv />
               <S.CardBtnDiv />
             </S.CardBtn>
-          </a>
+          </Link>
         </S.CardGroup>
         <S.CardContent>
-          <a href="" target="_blank">
-            <S.CardTitle>{title}</S.CardTitle>
-          </a>
+          <S.CardTitle>{title}</S.CardTitle>
           <S.CardDate>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,6 +77,7 @@ Card.propTypes = {
     theme: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Принимаем строку или число
   }).isRequired,
 };
 

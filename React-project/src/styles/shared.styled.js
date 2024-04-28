@@ -19,3 +19,11 @@ export const Hover01 = css`
     background-color: #33399b;
   }
 `;
+export const Hover03 = css`
+  &:hover {
+    background-color: #33399b;
+    & a {
+      color: #ffffff;
+    }
+  }
+`;

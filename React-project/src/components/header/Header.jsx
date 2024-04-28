@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { useState } from "react";
 import PopUser from "../popups/PopUser/PopUser";
-import * as S from './Header.styled';
-import { Container } from '../../styles/shared.styled';
+import * as S from "./header.styled";
+import { Container } from "../../styles/shared.styled";
+import { Link } from "react-router-dom";
+import { paths } from "../../lib/topic";
 
 function Header({ cardList, setCardList }) {
   const [isOpen, setOpen] = useState(false);
@@ -27,19 +29,18 @@ function Header({ cardList, setCardList }) {
       <Container>
         <S.HeaderBlock>
           <S.HeaderLogo>
-            <a href="/" target="_self">
-              <img src="../public/images/logo.png" alt="logo" />
-            </a>
+            <Link to={paths.MAIN}>
+              <img src="/images/logo.png" alt="logo" />
+            </Link>
           </S.HeaderLogo>
+
           <S.HeaderLogoDark>
-            <a href="/" target="_self">
+          <Link to={paths.MAIN}>
               <img src="images/logo_dark.png" alt="logo" />
-            </a>
+            </Link>
           </S.HeaderLogoDark>
           <S.HeaderNav>
-            <S.HeaderBtn onClick={onClick} >
-              Создать новую задачу
-            </S.HeaderBtn>
+            <S.HeaderBtn onClick={onClick}>Создать новую задачу</S.HeaderBtn>
             <a
               onClick={openUser}
               href="#user-set-target"
@@ -58,7 +59,7 @@ function Header({ cardList, setCardList }) {
 
 Header.propTypes = {
   cardList: PropTypes.array.isRequired,
-  setCardList: PropTypes.func.isRequired
+  setCardList: PropTypes.func.isRequired,
 };
 
 export default Header;
