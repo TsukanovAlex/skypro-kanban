@@ -3,10 +3,10 @@ import * as S from "../card/card.styled";
 import { Link } from "react-router-dom";
 
 function Card({ card }) {
-  const { title, date, topic, _id } = card; 
+  const { title, date, topic, _id } = card;
 
-  const getClassName = (title) => {
-    switch (title.toLowerCase()) {
+  const getClassName = (topic) => {
+    switch (topic.toLowerCase()) {
       case "copywriting":
         return "_purple";
       case "research":
@@ -22,7 +22,7 @@ function Card({ card }) {
     <S.CardItem>
       <S.CardsCard>
         <S.CardGroup>
-          <S.CardTheme $topik={getClassName(topic.toLowerCase())}>
+        <S.CardTheme $topic={getClassName(topic.toLowerCase())}>
             <p>{topic}</p>
           </S.CardTheme>
           <Link to={`/card/${String(_id)}`}>

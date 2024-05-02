@@ -6,18 +6,17 @@ import * as S from "./main.styled";
 import Header from "../header/Header";
 import { useState } from "react";
 
-export function Main({ taskList, isLoading }) {
+export function Main({ taskList, isLoading, error, user }) {
   const [cardList, setCardList] = useState([]);
 
   return (
     <S.Main>
-      <Header cardList={cardList} setCardList={setCardList} />
+      <Header cardList={cardList} setCardList={setCardList} user={user}/>
       <Container>
-        
         <S.MainBlock>
           <S.MainContent>
             {isLoading ? (
-              "Данные загружаются"
+              "Данные загружаются. Пожалуйста, подождите..."
             ) : (
               <>
                 {statusList.map((status) => (
@@ -32,6 +31,7 @@ export function Main({ taskList, isLoading }) {
                 ))}
               </>
             )}
+            {error && (<p style={{color:'#b70000'}}>Произошла ошибка. Попробуйте зайти позже...</p>)}
           </S.MainContent>
         </S.MainBlock>
       </Container>
@@ -41,5 +41,7 @@ export function Main({ taskList, isLoading }) {
 
 Main.propTypes = {
   taskList: PropTypes.array.isRequired,
+  error: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
+  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };

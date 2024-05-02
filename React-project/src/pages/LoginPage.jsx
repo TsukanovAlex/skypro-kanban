@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import Login from '../components/auth/Login';
 
-const LoginPage = ({ setIsAuth }) => {
+const LoginPage = ({ userLogin }) => {
   return (
     <>
-      <Login setIsAuth={setIsAuth} />
+      <Login userLogin={userLogin} />
     </>
   );
 };
 
 LoginPage.propTypes = {
-  setIsAuth: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired,
 };
 
 export default LoginPage;

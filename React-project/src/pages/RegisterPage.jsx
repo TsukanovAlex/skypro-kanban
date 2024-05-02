@@ -1,10 +1,10 @@
 import Register from "../components/auth/Register"
 
 
-const RegisterPage = () => {
+const RegisterPage = (userLogin) => {
   return (
    <>
-   <Register/>
+   <Register userLogin={userLogin}/>
    </>
   )
 }

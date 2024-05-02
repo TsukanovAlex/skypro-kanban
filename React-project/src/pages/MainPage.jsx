@@ -1,28 +1,39 @@
-  import { useState, useEffect } from "react";
-  // import cardList from "../utils/cardList";
-  import { Main } from "../components/main/Main";
-  import { Outlet } from "react-router-dom";
-  import { getTasks } from "../api";
+import { useState, useEffect } from "react";
+import { Main } from "../components/main/Main";
+import { Outlet } from "react-router-dom";
+import { getTodos } from "../api";
+import PropTypes from "prop-types";
 
+const MainPage = ({ user }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [taskList, setTaskList] = useState([]);
 
-  const MainPage = () => {
-    // eslint-disable-next-line
-    const [taskList, setTaskList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-      getTasks().then((taskList) => {
-        setTaskList(taskList.tasks);
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        if (user && user.token) {
+          const response = await getTodos(user.token); // Правильно передаем только токен, без обертки в объект
+          setTaskList(response.tasks);
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
         setIsLoading(false);
-      });
-    }, []);
+      }
+    };
+    fetchTodos();
+  }, [user]);
 
-    return (
-      <>
-        <Main taskList={taskList} isLoading={isLoading} />
-        <Outlet />
-      </>
-    );
-  };
+  return (
+    <>
+      <Main taskList={taskList} isLoading={isLoading} error={error} user={user} />
+      <Outlet />
+    </>
+  );
+};
+MainPage.propTypes = {
+  user: PropTypes.object,
+};
 
-  export default MainPage;
+export default MainPage;

@@ -1,15 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./login&register.styled";
 import { paths } from "../../lib/topic";
 import PropTypes from "prop-types";
+import { loginTodos } from "../../api";
+import { useState } from "react";
 
-export default function Login({ setIsAuth }) {
-  const navigate = useNavigate();
+export default function Login({ userLogin }) {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
-  function login() {
-    setIsAuth(true);
-    navigate(paths.MAIN);
-  }
+  const handleLoginTodoClick = async () => {
+    await loginTodos(login, password).then((responseData) => {
+      userLogin(responseData.user);
+    });
+  };
+  
 
   return (
     <>
@@ -22,18 +27,23 @@ export default function Login({ setIsAuth }) {
               </S.ModalTtl>
               <S.ModalFormLogin>
                 <S.ModalInput
-                  name="login"
-                  id="formlogin"
-                  placeholder="Эл. почта"
+                  type="text"
+                  value={login}
+                  placeholder="Логин"
+                  onChange={(e) => {
+                    setLogin(e.target.value);
+                  }}
                 />
                 <S.ModalInput
                   type="password"
-                  name="password"
-                  id="formpassword"
+                  value={password}
                   placeholder="Пароль"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
-                <S.ModalBtnEnter type="button" onClick={login}>
-                  Войти
+                <S.ModalBtnEnter type="button" onClick={handleLoginTodoClick}>
+                  <Link to={paths.MAIN}>Войти</Link>
                 </S.ModalBtnEnter>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
@@ -49,5 +59,5 @@ export default function Login({ setIsAuth }) {
 }
 
 Login.propTypes = {
-  setIsAuth: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired, 
 };

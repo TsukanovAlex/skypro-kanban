@@ -1,4 +1,4 @@
- import styled from "styled-components";
+import styled from "styled-components";
 import { topicStyles } from "../../lib/topic";
 
 export const CardItem = styled.div`
@@ -34,13 +34,13 @@ export const CardTheme = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  background-color: ${({ $theme }) =>
-    topicStyles[$theme]?.backgroundColor || "#94a6be"};
+  background-color: ${({ $topic }) =>
+    topicStyles[$topic]?.backgroundColor || "#94a6be"};
   & p {
     font-size: 10px;
     font-weight: 600;
     line-height: 10px;
-    color: ${({ $theme }) => topicStyles[$theme]?.color || "#ffffff"};
+    color: ${({ $topic }) => topicStyles[$topic]?.color || "#ffffff"};
   }
 `;
 export const CardBtn = styled.div`
