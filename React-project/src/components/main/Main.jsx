@@ -7,7 +7,7 @@ import Header from "../header/Header";
 import { useState } from "react";
 
 export function Main({ taskList, isLoading }) {
-  const [cardList, setCardList] = useState(taskList);
+  const [cardList, setCardList] = useState([]);
 
   return (
     <S.Main>
@@ -24,9 +24,9 @@ export function Main({ taskList, isLoading }) {
                   <Column
                     key={status}
                     status={status}
-                    cards={cardList.filter( 
-                      (card) =>
-                        card.status.toLowerCase() === status.toLowerCase()
+                    cards={taskList.filter( 
+                      (tasks) =>
+                      tasks.status.toLowerCase() === status.toLowerCase()
                     )}
                   />
                 ))}

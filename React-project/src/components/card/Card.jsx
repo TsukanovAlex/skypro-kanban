@@ -3,7 +3,7 @@ import * as S from "../card/card.styled";
 import { Link } from "react-router-dom";
 
 function Card({ card }) {
-  const { title, date, theme, id } = card;
+  const { title, date, topic, _id } = card; 
 
   const getClassName = (title) => {
     switch (title.toLowerCase()) {
@@ -22,10 +22,10 @@ function Card({ card }) {
     <S.CardItem>
       <S.CardsCard>
         <S.CardGroup>
-          <S.CardTheme $theme={getClassName(card.theme.toLowerCase())}>
-            <p>{theme}</p>
+          <S.CardTheme $topik={getClassName(topic.toLowerCase())}>
+            <p>{topic}</p>
           </S.CardTheme>
-          <Link to={`/card/${String(id)}`}>
+          <Link to={`/card/${String(_id)}`}>
             <S.CardBtn>
               <S.CardBtnDiv />
               <S.CardBtnDiv />
@@ -74,10 +74,10 @@ function Card({ card }) {
 
 Card.propTypes = {
   card: PropTypes.shape({
-    theme: PropTypes.string.isRequired,
+    topic: PropTypes.string.isRequired, // Update to topic
     title: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Принимаем строку или число
+    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   }).isRequired,
 };
 
