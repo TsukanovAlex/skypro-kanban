@@ -13,7 +13,7 @@ const MainPage = ({ user }) => {
     const fetchTodos = async () => {
       try {
         if (user && user.token) {
-          const response = await getTodos(user.token); // Правильно передаем только токен, без обертки в объект
+          const response = await getTodos(user.token); 
           setTaskList(response.tasks);
         }
       } catch (error) {
@@ -27,7 +27,7 @@ const MainPage = ({ user }) => {
 
   return (
     <>
-      <Main taskList={taskList} isLoading={isLoading} error={error} user={user} />
+      <Main taskList={taskList} setTaskList={setTaskList} isLoading={isLoading} error={error} user={user} />
       <Outlet />
     </>
   );

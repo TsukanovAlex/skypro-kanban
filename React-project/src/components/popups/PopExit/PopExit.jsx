@@ -1,17 +1,11 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import * as S from "../PopExit/popExit.styled"
 import { paths } from "../../../lib/topic"
 import PropTypes from "prop-types";
 
 
-function PopExit(setIsAuth){
-  const navigate = useNavigate();
-
-  function exit() {
-    setIsAuth(false);
-    navigate(paths.LOGIN);
-  }
-
+function PopExit({userExit}){
+  
     return (
     <S.PopExit id="popExit">
     <S.PopExitContainer>
@@ -19,11 +13,9 @@ function PopExit(setIsAuth){
         <S.PopExitTtl>
           <h2>Выйти из аккаунта?</h2>
         </S.PopExitTtl>
-        
-      
           <S.popExitForm>
-            <S.ButtonExitYes>
-              <Link onClick={exit}>Да, выйти</Link>
+            <S.ButtonExitYes onClick={userExit}>
+              <Link onClick={paths.LOGIN}>Да, выйти</Link>
             </S.ButtonExitYes>
             <S.ButtonExitNo>
               <Link to={paths.MAIN}>Нет, остаться</Link> 
@@ -37,6 +29,6 @@ function PopExit(setIsAuth){
 }
 
 PopExit.propTypes = {
-  setIsAuth: PropTypes.func.isRequired,
+  userExit: PropTypes.func.isRequired,
 };
 export default PopExit

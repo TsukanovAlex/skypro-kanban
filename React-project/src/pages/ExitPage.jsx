@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ExitPage = ({ userExit }) => {
   return (
     <div>
-      <PopExit setIsAuth={userExit} />
+      <PopExit userExit={userExit} />
     </div>
   );
 };

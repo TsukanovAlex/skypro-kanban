@@ -11,9 +11,12 @@ import PrivateRoutes from "./PrivateRoutes";
 
 export const AppRoutes = () => {
   const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const navigate = useNavigate();
 
   function userLogin (newUser) {
+    console.log(newUser)
+    // localStorage.setItem("user", JSON.stringify(newUser))
     setUser(newUser);
     navigate(paths.MAIN)
   }
