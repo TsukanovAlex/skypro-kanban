@@ -8,13 +8,24 @@ import { useState } from "react";
 export default function Login({ userLogin }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLoginTodoClick = async () => {
-    await loginTodos(login, password).then((responseData) => {
+    try {
+      if (!login || !password) {
+        throw new Error("Введите логин и пароль");
+      }
+      const responseData = await loginTodos(login, password);
+      
+      if (!responseData.user) {
+        throw new Error("Неправильный логин или пароль");
+      }
+      
       userLogin(responseData.user);
-    });
+    } catch (error) {
+      setError(error.message);
+    }
   };
-  
 
   return (
     <>
@@ -42,8 +53,13 @@ export default function Login({ userLogin }) {
                     setPassword(e.target.value);
                   }}
                 />
+                {error && (
+                  <p style={{ color: '#b70000', fontSize: 20, textAlign: 'center' }}>
+                    {error}
+                  </p>
+                )}
                 <S.ModalBtnEnter type="button" onClick={handleLoginTodoClick}>
-                  <Link to={paths.MAIN}>Войти</Link>
+                  Войти
                 </S.ModalBtnEnter>
                 <S.ModalFormGroup>
                   <p>Нужно зарегистрироваться?</p>
