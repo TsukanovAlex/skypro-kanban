@@ -4,7 +4,6 @@ import { Hover03 } from "../../../styles/shared.styled";
 export const PopUserSet = styled.div`
   display: block;
   position: absolute;
-  top: 61px;
   right: 0;
   width: 213px;
   height: 205px;
