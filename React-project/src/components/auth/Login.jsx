@@ -1,15 +1,31 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as S from "./login&register.styled";
 import { paths } from "../../lib/topic";
 import PropTypes from "prop-types";
+import { loginTodos } from "../../api";
+import { useState } from "react";
 
-export default function Login({ setIsAuth }) {
-  const navigate = useNavigate();
+export default function Login({ userLogin }) {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  function login() {
-    setIsAuth(true);
-    navigate(paths.MAIN);
-  }
+  const handleLoginTodoClick = async () => {
+    try {
+      if (!login || !password) {
+        throw new Error("Введите логин и пароль");
+      }
+      const responseData = await loginTodos(login, password);
+      
+      if (!responseData.user) {
+        throw new Error("Неправильный логин или пароль");
+      }
+      
+      userLogin(responseData.user);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <>
@@ -22,17 +38,27 @@ export default function Login({ setIsAuth }) {
               </S.ModalTtl>
               <S.ModalFormLogin>
                 <S.ModalInput
-                  name="login"
-                  id="formlogin"
-                  placeholder="Эл. почта"
+                  type="text"
+                  value={login}
+                  placeholder="Логин"
+                  onChange={(e) => {
+                    setLogin(e.target.value);
+                  }}
                 />
                 <S.ModalInput
                   type="password"
-                  name="password"
-                  id="formpassword"
+                  value={password}
                   placeholder="Пароль"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
-                <S.ModalBtnEnter type="button" onClick={login}>
+                {error && (
+                  <p style={{ color: '#b70000', fontSize: 20, textAlign: 'center' }}>
+                    {error}
+                  </p>
+                )}
+                <S.ModalBtnEnter type="button" onClick={handleLoginTodoClick}>
                   Войти
                 </S.ModalBtnEnter>
                 <S.ModalFormGroup>
@@ -49,5 +75,5 @@ export default function Login({ setIsAuth }) {
 }
 
 Login.propTypes = {
-  setIsAuth: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired, 
 };

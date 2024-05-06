@@ -4,29 +4,28 @@ import Column from "../column/Column";
 import PropTypes from "prop-types";
 import * as S from "./main.styled";
 import Header from "../header/Header";
-import { useState } from "react";
 
-export function Main({ taskList, isLoading }) {
-  const [cardList, setCardList] = useState(taskList);
+
+export function Main({ taskList, setTaskList, isLoading, error, user }) {
 
   return (
     <S.Main>
-      <Header cardList={cardList} setCardList={setCardList} />
+      <Header taskList={taskList} setTaskList={setTaskList} user={user}/>
       <Container>
-        
         <S.MainBlock>
+        
           <S.MainContent>
             {isLoading ? (
-              "Данные загружаются"
+              "Данные загружаются. Пожалуйста, подождите..."
             ) : (
               <>
                 {statusList.map((status) => (
                   <Column
                     key={status}
                     status={status}
-                    cards={cardList.filter( 
-                      (card) =>
-                        card.status.toLowerCase() === status.toLowerCase()
+                    cards={taskList.filter( 
+                      (tasks) =>
+                      tasks.status.toLowerCase() === status.toLowerCase()
                     )}
                   />
                 ))}
@@ -34,6 +33,11 @@ export function Main({ taskList, isLoading }) {
             )}
           </S.MainContent>
         </S.MainBlock>
+        {error && (
+  <p style={{ color: '#b70000', fontSize: 40, textAlign: 'center' }}>
+    Произошла ошибка. Попробуйте зайти позже...
+  </p>
+)}
       </Container>
     </S.Main>
   );
@@ -41,5 +45,8 @@ export function Main({ taskList, isLoading }) {
 
 Main.propTypes = {
   taskList: PropTypes.array.isRequired,
+  setTaskList: PropTypes.func.isRequired,
+  error: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
+  user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };

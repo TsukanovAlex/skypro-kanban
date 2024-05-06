@@ -6,7 +6,7 @@ import { Container } from "../../styles/shared.styled";
 import { Link } from "react-router-dom";
 import { paths } from "../../lib/topic";
 
-function Header({ cardList, setCardList }) {
+function Header({ taskList, setTaskList, user }) {
   const [isOpen, setOpen] = useState(false);
 
   const openUser = () => {
@@ -14,14 +14,15 @@ function Header({ cardList, setCardList }) {
   };
 
   function onClick() {
-    const newCard = {
-      id: cardList.length + 1,
+    const newTask = {
+      _id: taskList.length + 1,
       title: "Новая задача",
-      theme: "Web Design",
+      topic: "Web Design",
       date: "30.10.23",
       status: "Без статуса",
     };
-    setCardList([...cardList, newCard]);
+    setTaskList([...taskList, newTask]);
+    console.log("Updated card list:", [...taskList, newTask]);
   }
 
   return (
@@ -35,7 +36,7 @@ function Header({ cardList, setCardList }) {
           </S.HeaderLogo>
 
           <S.HeaderLogoDark>
-          <Link to={paths.MAIN}>
+            <Link to={paths.MAIN}>
               <img src="images/logo_dark.png" alt="logo" />
             </Link>
           </S.HeaderLogoDark>
@@ -46,20 +47,21 @@ function Header({ cardList, setCardList }) {
               href="#user-set-target"
               className="header__user _hover02"
             >
-              Ivan Ivanov
+              {user.name}
             </a>
           </S.HeaderNav>
         </S.HeaderBlock>
       </Container>
 
-      {isOpen && <PopUser />}
+      {isOpen && <PopUser user={user} />}
     </S.Header>
   );
 }
 
 Header.propTypes = {
-  cardList: PropTypes.array.isRequired,
-  setCardList: PropTypes.func.isRequired,
+  taskList: PropTypes.array.isRequired,
+  setTaskList: PropTypes.func.isRequired,
+  user: PropTypes.object,
 };
 
 export default Header;
