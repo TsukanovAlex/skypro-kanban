@@ -4,12 +4,11 @@ import { Container } from "../../../styles/shared.styled";
 import { paths } from "../../../lib/topic";
 
 function PopUser(user) {
-  console.log(user)
   return (
     <Container>
       <S.PopUserSet>
         <S.PopUserSetName>{user.user.name}</S.PopUserSetName>
-        <S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+        <S.PopUserSetMail>{user.login}</S.PopUserSetMail>
         <S.PopUserSetTheme>
           <p>Темная тема</p>
           <S.CheckboxInput type="checkbox" />
