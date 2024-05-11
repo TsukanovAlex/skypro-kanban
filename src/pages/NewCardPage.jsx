@@ -1,4 +1,5 @@
-import { PopNewCard } from "../components/popups/PopNewCard/popNewCard"
+import PopNewCard from "../components/popups/PopNewCard/PopNewCard"
+
 
 const NewCardPage = () => {
     return <PopNewCard/>
