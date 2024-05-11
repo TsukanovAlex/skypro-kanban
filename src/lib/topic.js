@@ -23,5 +23,6 @@ export const paths = {
   LOGIN: "/login",
   EXIT: "/exit",
   REGISTER: "/register",
+  NEW_CARD: "/new-card",
   NOT_FOUND: "*",
 };
