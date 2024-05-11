@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import * as S from "../PopExit/popExit.styled"
 import { paths } from "../../../lib/topic"
-import PropTypes from "prop-types";
+import { useUserContext } from "../../../context/hooks/useUser";
 
 
-function PopExit({userExit}){
+function PopExit(){
+  const {userExit} = useUserContext()
   
     return (
     <S.PopExit id="popExit">
@@ -28,7 +29,4 @@ function PopExit({userExit}){
 
 }
 
-PopExit.propTypes = {
-  userExit: PropTypes.func.isRequired,
-};
 export default PopExit

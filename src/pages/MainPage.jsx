@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Main } from "../components/main/Main";
 import { Outlet } from "react-router-dom";
 import { getTodos } from "../api";
-import PropTypes from "prop-types";
+import { useUserContext } from "../context/hooks/useUser";
 
-const MainPage = ({ user }) => {
+const MainPage = () => {
+  const {user} = useUserContext()
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [taskList, setTaskList] = useState([]);
@@ -27,13 +28,10 @@ const MainPage = ({ user }) => {
 
   return (
     <>
-      <Main taskList={taskList} setTaskList={setTaskList} isLoading={isLoading} error={error} user={user} />
+      <Main taskList={taskList} setTaskList={setTaskList} isLoading={isLoading} error={error} />
       <Outlet />
     </>
   );
-};
-MainPage.propTypes = {
-  user: PropTypes.object,
 };
 
 export default MainPage;

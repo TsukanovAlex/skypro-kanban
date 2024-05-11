@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import * as S from "./login&register.styled";
 import { paths } from "../../lib/topic";
-import PropTypes from "prop-types";
 import { loginTodos } from "../../api";
 import { useState } from "react";
+import { useUserContext } from "../../context/hooks/useUser";
 
-export default function Login({ userLogin }) {
+export default function Login() {
+  const { userLogin } = useUserContext();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,11 +17,11 @@ export default function Login({ userLogin }) {
         throw new Error("Введите логин и пароль");
       }
       const responseData = await loginTodos(login, password);
-      
+
       if (!responseData.user) {
         throw new Error("Неправильный логин или пароль");
       }
-      
+
       userLogin(responseData.user);
     } catch (error) {
       setError(error.message);
@@ -54,7 +55,13 @@ export default function Login({ userLogin }) {
                   }}
                 />
                 {error && (
-                  <p style={{ color: '#b70000', fontSize: 20, textAlign: 'center' }}>
+                  <p
+                    style={{
+                      color: "#b70000",
+                      fontSize: 20,
+                      textAlign: "center",
+                    }}
+                  >
                     {error}
                   </p>
                 )}
@@ -73,7 +80,3 @@ export default function Login({ userLogin }) {
     </>
   );
 }
-
-Login.propTypes = {
-  userLogin: PropTypes.func.isRequired, 
-};

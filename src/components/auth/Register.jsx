@@ -14,8 +14,10 @@ import { paths } from "../../lib/topic";
 import { useState } from "react";
 import { authTodos } from "../../api";
 import PropTypes from "prop-types";
+import { useUserContext } from "../../context/hooks/useUser";
 
-export function Register({ userLogin }) {
+export function Register() {
+  const {userLogin} = useUserContext()
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");

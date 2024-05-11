@@ -4,13 +4,14 @@ import Column from "../column/Column";
 import PropTypes from "prop-types";
 import * as S from "./main.styled";
 import Header from "../header/Header";
+// import { useUserContext } from "../../context/hooks/useUser";
 
 
-export function Main({ taskList, setTaskList, isLoading, error, user }) {
-
+export function Main({ taskList, setTaskList, isLoading, error }) {
+// const {user} = useUserContext()
   return (
     <S.Main>
-      <Header taskList={taskList} setTaskList={setTaskList} user={user}/>
+      <Header taskList={taskList} setTaskList={setTaskList} />
       <Container>
         <S.MainBlock>
         

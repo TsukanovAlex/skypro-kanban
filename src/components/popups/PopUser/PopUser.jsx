@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import * as S from "../PopUser/popUser.styled";
 import { Container } from "../../../styles/shared.styled";
 import { paths } from "../../../lib/topic";
+import { useUserContext } from "../../../context/hooks/useUser";
 
-function PopUser(user) {
+function PopUser() {
+  const {user} = useUserContext()
   return (
     <Container>
       <S.PopUserSet>
-        <S.PopUserSetName>{user.user.name}</S.PopUserSetName>
+        <S.PopUserSetName>{user.name}</S.PopUserSetName>
         <S.PopUserSetMail>{user.login}</S.PopUserSetMail>
         <S.PopUserSetTheme>
           <p>Темная тема</p>

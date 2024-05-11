@@ -1,16 +1,11 @@
-import Register from "../components/auth/Register"
-import PropTypes from "prop-types";
+import Register from "../components/auth/Register";
 
-
-const RegisterPage = ({userLogin}) => {
+const RegisterPage = () => {
   return (
-   <>
-   <Register userLogin={userLogin}/>
-   </>
-  )
-}
-RegisterPage.propTypes = {
-  userLogin: PropTypes.func.isRequired,
+    <>
+      <Register />
+    </>
+  );
 };
 
-export default RegisterPage
+export default RegisterPage;

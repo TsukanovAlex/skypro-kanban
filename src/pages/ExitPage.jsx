@@ -1,16 +1,11 @@
 import PopExit from "../components/popups/PopExit/PopExit";
-import PropTypes from "prop-types";
 
-const ExitPage = ({ userExit }) => {
+const ExitPage = () => {
   return (
     <div>
-      <PopExit userExit={userExit} />
+      <PopExit />
     </div>
   );
-};
-
-ExitPage.propTypes = {
-  userExit: PropTypes.func.isRequired,
 };
 
 export default ExitPage;

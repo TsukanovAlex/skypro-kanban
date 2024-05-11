@@ -6,8 +6,10 @@ import * as S from "./header.styled";
 import { Container } from "../../styles/shared.styled";
 import { Link } from "react-router-dom";
 import { paths } from "../../lib/topic";
+import { useUserContext } from "../../context/hooks/useUser";
 
-function Header({ user }) {
+function Header() {
+  const {user} = useUserContext()
   const [isOpen, setOpen] = useState(false);
   const [isOpenNewCard, setOpenNewCard] = useState(false);
 

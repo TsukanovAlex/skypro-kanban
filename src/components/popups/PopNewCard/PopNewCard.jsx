@@ -1,14 +1,21 @@
+import { useState } from "react";
 import Calendar from "../../calendar/Calendar";
 import * as S from "./popNewCard.styled";
 
 function PopNewCard() {
+  const [isOpenNewCard, setOpenNewCard] = useState(true);
+
+  const closeNewCard = () => {
+    setOpenNewCard(false);
+  };
+
   return (
-    <S.PopNewCard>
+    <S.PopNewCard style={{ display: isOpenNewCard ? "block" : "none" }}>
       <S.PopNewCardContainer>
         <S.PopNewCardBlock>
           <S.PopNewCardContent>
             <S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
-            <S.PopNewCardClose>✖</S.PopNewCardClose>
+            <S.PopNewCardClose onClick={closeNewCard}>✖</S.PopNewCardClose>
             <S.popNewCardWrap>
               <S.PopNewCardForm>
                 <S.FormNewBlock>
