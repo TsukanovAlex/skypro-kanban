@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import PropTypes from "prop-types";
+
 
 export const TaskContext = createContext(null);
 
@@ -13,6 +13,4 @@ export function TaskProvider({ children }) {
   );
 }
 
-TaskProvider.propTypes = {
-  children: PropTypes.obj,
-};
+
