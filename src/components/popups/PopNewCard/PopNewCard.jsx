@@ -1,14 +1,33 @@
 import { useState } from "react";
 import Calendar from "../../calendar/Calendar";
 import * as S from "./popNewCard.styled";
+import { postTodos } from "../../../api";
+import { useUserContext } from "../../../context/hooks/useUser";
 
 function PopNewCard() {
+  const { user } = useUserContext();
+  const [selected, setSelected] = useState();
   const [isOpenNewCard, setOpenNewCard] = useState(true);
 
   const closeNewCard = () => {
     setOpenNewCard(false);
   };
 
+  const [newTask, setNewTask] = useState({
+    title: "",
+    topic: "",
+    description: "",
+  });
+  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const taskData = { ...newTask, date: selected };
+postTodos({...taskData, token: user?.token}).then((responseData) => {
+      // setCards(responseData.tasks);
+      console.log(responseData)
+      closeNewCard()
+    }).catch(error=>console.log(error.message))
+  };
   return (
     <S.PopNewCard style={{ display: isOpenNewCard ? "block" : "none" }}>
       <S.PopNewCardContainer>
@@ -21,6 +40,9 @@ function PopNewCard() {
                 <S.FormNewBlock>
                   <S.SubTtl htmlFor="formTitle">Название задачи</S.SubTtl>
                   <S.FormNewInput
+                    onChange={(e) =>
+                      setNewTask({ ...newTask, title: e.target.value })
+                    }
                     type="text"
                     name="name"
                     id="formTitle"
@@ -31,6 +53,9 @@ function PopNewCard() {
                 <S.FormNewBlock>
                   <S.SubTtl>Описание задачи</S.SubTtl>
                   <S.FormNewArea
+                    onChange={(e) =>
+                      setNewTask({ ...newTask, description: e.target.value })
+                    }
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
@@ -38,14 +63,45 @@ function PopNewCard() {
                   />
                 </S.FormNewBlock>
               </S.PopNewCardForm>
-              <Calendar />
+              <Calendar selected={selected} setSelected={setSelected} />
             </S.popNewCardWrap>
             <S.Categories>
               <S.SubTtl>
                 <S.CategoriesP>Категория</S.CategoriesP>
               </S.SubTtl>
               <S.CategoriesThemes>
-                <S.CategoriesTheme className="_orange _active-category">
+                <label>
+                  Web Design{" "}
+                  <input
+                    onChange={(e) =>
+                      setNewTask({ ...newTask, topic: e.target.value })
+                    }
+                    type="radio"
+                    value="Web Design"
+                  />
+                </label>
+                <label>
+                  Research{" "}
+                  <input
+                    onChange={(e) =>
+                      setNewTask({ ...newTask, topic: e.target.value })
+                    }
+                    type="radio"
+                    value="Research"
+                  />
+                </label>
+                <label>
+                  Copywriting{" "}
+                  <input
+                    onChange={(e) =>
+                      setNewTask({ ...newTask, topic: e.target.value })
+                    }
+                    type="radio"
+                    value="Copywriting"
+                  />
+                </label>
+
+                {/* <S.CategoriesTheme className="_orange _active-category">
                   <p className="_orange">Web Design</p>
                 </S.CategoriesTheme>
                 <S.CategoriesTheme className=" _green">
@@ -53,10 +109,10 @@ function PopNewCard() {
                 </S.CategoriesTheme>
                 <S.CategoriesTheme className=" _purple">
                   <p className="_purple">Copywriting</p>
-                </S.CategoriesTheme>
+                </S.CategoriesTheme> */}
               </S.CategoriesThemes>
             </S.Categories>
-            <S.BtnFormNewCreate>Создать задачу</S.BtnFormNewCreate>
+            <S.BtnFormNewCreate onClick={handleSubmit}>Создать задачу</S.BtnFormNewCreate>
           </S.PopNewCardContent>
         </S.PopNewCardBlock>
       </S.PopNewCardContainer>

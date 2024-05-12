@@ -89,10 +89,7 @@ export const SubTtl = styled.label`
 
 export const FormNewInput = styled.input`
   width: 100%;
-
-  // Доп. стиль к инпуту
   margin: 20px 0;
-
   outline: none;
   padding: 14px;
   background: transparent;
@@ -101,6 +98,7 @@ export const FormNewInput = styled.input`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
+  font-family: inherit;
 
   &::-moz-placeholder {
     font-weight: 400;
@@ -108,6 +106,7 @@ export const FormNewInput = styled.input`
     line-height: 1px;
     color: #94a6be;
     letter-spacing: -0.14px;
+    font-family: inherit;
   }
   &::placeholder {
     font-weight: 400;
@@ -115,10 +114,12 @@ export const FormNewInput = styled.input`
     line-height: 1px;
     color: #94a6be;
     letter-spacing: -0.14px;
+    font-family: inherit;
   }
 `;
 
-export const FormNewArea = styled.input`
+export const FormNewArea = styled.textarea`
+  position: relative;
   width: 100%;
   outline: none;
   padding: 14px;
@@ -128,26 +129,33 @@ export const FormNewArea = styled.input`
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
-
-  // Доп. стили к эреа
   max-width: 370px;
   margin-top: 14px;
   height: 200px;
+  font-family: inherit;
 
   &::-moz-placeholder {
+    position: absolute;
+    top: 14px;
+    left: 14px;
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
     color: #94a6be;
     letter-spacing: -0.14px;
+    font-family: inherit;
   }
 
   &::placeholder {
+    position: absolute;
+    top: 21px;
+    left: 14px;
     font-weight: 400;
     font-size: 14px;
     line-height: 1px;
     color: #94a6be;
     letter-spacing: -0.14px;
+    font-family: inherit;   
   }
 `;
 
