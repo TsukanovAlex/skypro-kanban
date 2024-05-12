@@ -4,11 +4,13 @@ import Column from "../column/Column";
 import PropTypes from "prop-types";
 import * as S from "./main.styled";
 import Header from "../header/Header";
+import { useTaskContext } from "../../context/hooks/useTasks";
 // import { useUserContext } from "../../context/hooks/useUser";
 
 
-export function Main({ taskList, setTaskList, isLoading, error }) {
+export function Main({isLoading, error }) {
 // const {user} = useUserContext()
+const {taskList, setTaskList} = useTaskContext()
   return (
     <S.Main>
       <Header taskList={taskList} setTaskList={setTaskList} />
@@ -45,8 +47,6 @@ export function Main({ taskList, setTaskList, isLoading, error }) {
 }
 
 Main.propTypes = {
-  taskList: PropTypes.array.isRequired,
-  setTaskList: PropTypes.func.isRequired,
   error: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   user: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),

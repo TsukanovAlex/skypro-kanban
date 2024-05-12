@@ -3,12 +3,14 @@ import { Main } from "../components/main/Main";
 import { Outlet } from "react-router-dom";
 import { getTodos } from "../api";
 import { useUserContext } from "../context/hooks/useUser";
+import { useTaskContext } from "../context/hooks/useTasks";
 
 const MainPage = () => {
+  const {setTaskList} = useTaskContext();
   const {user} = useUserContext()
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [taskList, setTaskList] = useState([]);
+  
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -28,7 +30,7 @@ const MainPage = () => {
 
   return (
     <>
-      <Main taskList={taskList} setTaskList={setTaskList} isLoading={isLoading} error={error} />
+      <Main isLoading={isLoading} error={error} />
       <Outlet />
     </>
   );

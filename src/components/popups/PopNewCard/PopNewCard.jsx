@@ -3,9 +3,12 @@ import Calendar from "../../calendar/Calendar";
 import * as S from "./popNewCard.styled";
 import { postTodos } from "../../../api";
 import { useUserContext } from "../../../context/hooks/useUser";
+import { useTaskContext } from "../../../context/hooks/useTasks";
 
 function PopNewCard() {
+  const {setTaskList} = useTaskContext()
   const { user } = useUserContext();
+  const [error, setError] = useState(null);
   const [selected, setSelected] = useState();
   const [isOpenNewCard, setOpenNewCard] = useState(true);
 
@@ -23,10 +26,12 @@ function PopNewCard() {
     event.preventDefault();
     const taskData = { ...newTask, date: selected };
 postTodos({...taskData, token: user?.token}).then((responseData) => {
-      // setCards(responseData.tasks);
+  setTaskList(responseData.tasks);
       console.log(responseData)
       closeNewCard()
-    }).catch(error=>console.log(error.message))
+    }).catch((err) => {
+      setError(err.message);
+    });
   };
   return (
     <S.PopNewCard style={{ display: isOpenNewCard ? "block" : "none" }}>
@@ -113,6 +118,7 @@ postTodos({...taskData, token: user?.token}).then((responseData) => {
               </S.CategoriesThemes>
             </S.Categories>
             <S.BtnFormNewCreate onClick={handleSubmit}>Создать задачу</S.BtnFormNewCreate>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </S.PopNewCardContent>
         </S.PopNewCardBlock>
       </S.PopNewCardContainer>

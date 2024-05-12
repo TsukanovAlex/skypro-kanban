@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { paths } from "../lib/topic";
+import PropTypes from "prop-types";
 
   
   export const UserContext = createContext(null)
@@ -28,3 +29,7 @@ import { paths } from "../lib/topic";
       )
   }
 
+  UserProvider.propTypes = {
+    children: PropTypes.obj,
+  };
+  
