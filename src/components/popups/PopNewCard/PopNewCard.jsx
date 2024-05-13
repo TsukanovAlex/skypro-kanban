@@ -4,9 +4,10 @@ import * as S from "./popNewCard.styled";
 import { postTodos } from "../../../api";
 import { useUserContext } from "../../../context/hooks/useUser";
 import { useTaskContext } from "../../../context/hooks/useTasks";
+import { topicWithColors } from "../../../lib/topic";
 
 function PopNewCard() {
-  const {setTaskList} = useTaskContext()
+  const { setTaskList } = useTaskContext();
   const { user } = useUserContext();
   const [error, setError] = useState(null);
   const [selected, setSelected] = useState();
@@ -21,17 +22,24 @@ function PopNewCard() {
     topic: "",
     description: "",
   });
-  
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewTask({ ...newTask, [name]: value });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const taskData = { ...newTask, date: selected };
-postTodos({...taskData, token: user?.token}).then((responseData) => {
-  setTaskList(responseData.tasks);
-      console.log(responseData)
-      closeNewCard()
-    }).catch((err) => {
-      setError(err.message);
-    });
+    postTodos({ ...taskData, token: user?.token })
+      .then((responseData) => {
+        setTaskList(responseData.tasks);
+        console.log(responseData);
+        closeNewCard();
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   };
   return (
     <S.PopNewCard style={{ display: isOpenNewCard ? "block" : "none" }}>
@@ -75,49 +83,31 @@ postTodos({...taskData, token: user?.token}).then((responseData) => {
                 <S.CategoriesP>Категория</S.CategoriesP>
               </S.SubTtl>
               <S.CategoriesThemes>
-                <label>
-                  Web Design{" "}
-                  <input
-                    onChange={(e) =>
-                      setNewTask({ ...newTask, topic: e.target.value })
-                    }
-                    type="radio"
-                    value="Web Design"
-                  />
-                </label>
-                <label>
-                  Research{" "}
-                  <input
-                    onChange={(e) =>
-                      setNewTask({ ...newTask, topic: e.target.value })
-                    }
-                    type="radio"
-                    value="Research"
-                  />
-                </label>
-                <label>
-                  Copywriting{" "}
-                  <input
-                    onChange={(e) =>
-                      setNewTask({ ...newTask, topic: e.target.value })
-                    }
-                    type="radio"
-                    value="Copywriting"
-                  />
-                </label>
+                {topicWithColors.map((item, index) => {
+                  return (
+                    <S.CategoriesTheme
+                      key={index}
+                      htmlFor={index}
+                      $topicColor={[item.color]}
+                      style={newTask.topic === item.topic ? { opacity: 1 } : {}}
+                    >
+                      {item.topic}
 
-                {/* <S.CategoriesTheme className="_orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </S.CategoriesTheme>
-                <S.CategoriesTheme className=" _green">
-                  <p className="_green">Research</p>
-                </S.CategoriesTheme>
-                <S.CategoriesTheme className=" _purple">
-                  <p className="_purple">Copywriting</p>
-                </S.CategoriesTheme> */}
+                      <input
+                        onChange={handleInputChange}
+                        type="radio"
+                        id={index}
+                        name="topic"
+                        value={item.topic}
+                      />
+                    </S.CategoriesTheme>
+                  );
+                })}
               </S.CategoriesThemes>
             </S.Categories>
-            <S.BtnFormNewCreate onClick={handleSubmit}>Создать задачу</S.BtnFormNewCreate>
+            <S.BtnFormNewCreate onClick={handleSubmit}>
+              Создать задачу
+            </S.BtnFormNewCreate>
             {error && <p style={{ color: "red" }}>{error}</p>}
           </S.PopNewCardContent>
         </S.PopNewCardBlock>

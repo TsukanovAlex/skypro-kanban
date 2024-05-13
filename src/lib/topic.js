@@ -17,6 +17,12 @@ export const topicStyles = {
   },
 };
 
+export const topicWithColors = [
+  { topic: "Web Design", color: "_orange" },
+  { topic: "Research", color: "_green" },
+  { topic: "Copywriting", color: "_purple" },
+]; 
+
 export const paths = {
   MAIN: "/",
   CARD: "/card/:id",
