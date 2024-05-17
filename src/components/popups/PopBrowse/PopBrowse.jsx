@@ -106,7 +106,7 @@ function PopBrowse() {
                   <S.FormBrowseArea
                     onChange={handleInputChange}
                     value={editTask.description}
-                    disabled={!isEdited} // Поля ввода блокируются при !isEdited
+                    disabled={!isEdited}
                     name="description"
                     id="textArea01"
                     placeholder="Введите описание задачи..."
@@ -118,10 +118,10 @@ function PopBrowse() {
             <S.PopBrowseBtnEdit>
               {error && <p style={{ color: "red" }}>{error}</p>}
               <S.BtnGroup>
-                {!isEdited && ( // Показываем кнопку "Редактировать задачу" только если !isEdited
+                {!isEdited && ( 
                   <S.BtnBg onClick={() => setIsEdited(true)}>Редактировать задачу</S.BtnBg>
                 )}
-                {isEdited && ( // Показываем кнопку "Сохранить" только если isEdited
+                {isEdited && ( 
                   <S.BtnBg onClick={editedTask}>Сохранить</S.BtnBg>
                 )}
                 <S.BtnBor onClick={() => setIsEdited(false)}>Отменить</S.BtnBor>
