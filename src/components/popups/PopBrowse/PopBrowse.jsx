@@ -124,7 +124,9 @@ function PopBrowse() {
                 {isEdited && ( 
                   <S.BtnBg onClick={editedTask}>Сохранить</S.BtnBg>
                 )}
+                {isEdited && ( 
                 <S.BtnBor onClick={() => setIsEdited(false)}>Отменить</S.BtnBor>
+              )}
                 <S.BtnBor>
                   <a href="#">Удалить задачу</a>
                 </S.BtnBor>
