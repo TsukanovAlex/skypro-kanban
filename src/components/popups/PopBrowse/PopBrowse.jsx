@@ -1,12 +1,69 @@
-import { Link, useParams } from "react-router-dom";
-import { paths } from "../../../lib/topic";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { paths, status, topicHeader } from "../../../lib/topic";
 import Calendar from "../../calendar/Calendar";
 import * as S from "./popBrowse.styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useUserContext } from "../../../context/hooks/useUser";
+import { editTodo } from "../../../api";
+import { useTaskContext } from "../../../context/hooks/useTasks";
 
 function PopBrowse() {
   const { id } = useParams();
-  const [selected, setSelected] = useState();
+  const { taskList, setTaskList } = useTaskContext();
+  const { user } = useUserContext();
+  const navigate = useNavigate();
+
+  const [selected, setSelected] = useState(null);
+  const [error, setError] = useState(null);
+  const [isEdited, setIsEdited] = useState(false);
+  const [statusCard, setStatusCard] = useState("");
+  const [editTask, setEditTask] = useState({
+    title: "",
+    description: "",
+    topic: "",
+    date: "",
+    status: "",
+  });
+
+  useEffect(() => {
+    const card = taskList.find((item) => item._id === id);
+    if (card) {
+      setEditTask({
+        title: card.title,
+        description: card.description,
+        topic: card.topic,
+        date: card.date,
+        status: card.status,
+      });
+      setStatusCard(card.status);
+    }
+  }, [id, taskList]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditTask({ ...editTask, [name]: value });
+  };
+
+  const editedTask = () => {
+    const requestData = {
+      token: user?.token,
+      id,
+      title: editTask.title,
+      status: statusCard,
+      description: editTask.description,
+      topic: editTask.topic,
+    };
+  
+  
+    editTodo(requestData)
+      .then((responseData) => {
+        setTaskList(responseData.tasks);
+        navigate(paths.MAIN);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
 
   return (
     <S.PopBrowse>
@@ -15,57 +72,59 @@ function PopBrowse() {
           <S.PopBrowseContent>
             <S.PopBrowseTopBlock>
               <S.PopBrowseTtl>Задача № {id}</S.PopBrowseTtl>
-              <S.PopBrowseCategoriesTheme>
-                <p>Web Design</p>
+              <S.PopBrowseCategoriesTheme $topicColor={topicHeader[editTask.topic]}>
+                <p>{editTask.topic}</p>
               </S.PopBrowseCategoriesTheme>
             </S.PopBrowseTopBlock>
             <S.Status>
               <p>Статус</p>
               <S.StatusThemes>
-                <S.StatusTheme>
-                  <p>Без статуса</p>
-                </S.StatusTheme>
-                <S.StatusTheme>
-                  <p className="_gray">Нужно сделать</p>
-                </S.StatusTheme>
-                <div className="status__theme _hide">
-                  <p>В работе</p>
-                </div>
-                <S.StatusTheme>
-                  <p>Тестирование</p>
-                </S.StatusTheme>
-                <S.StatusTheme>
-                  <p>Готово</p>
-                </S.StatusTheme>
+                {status.map((item, index) => (
+                  <S.StatusTheme
+                    onClick={() => setStatusCard(item)}
+                    key={index}
+                    style={statusCard === item ? { backgroundColor: "#94a6be", color: "#ffffff" } : {}}
+                  >
+                    {item}
+                    <input
+                      onChange={handleInputChange}
+                      type="radio"
+                      name="status"
+                      value={item}
+                      checked={statusCard === item}
+                    />
+                  </S.StatusTheme>
+                ))}
               </S.StatusThemes>
             </S.Status>
             <S.PopBrowseWrap>
-              <S.PopBrowseForm id="formBrowseCard" action="#">
-                <S.PopBrowseBlock>
-                  <S.PopBrowseLabel>Описание задачи</S.PopBrowseLabel>
+              <S.PopBrowseForm>
+                <S.FormBrowseBlock>
+                  <S.PopBrowseLabel>
+                    <p>Описание задачи</p>
+                  </S.PopBrowseLabel>
                   <S.FormBrowseArea
-                    className="form-browse__area"
-                    name="text"
+                    onChange={handleInputChange}
+                    value={editTask.description}
+                    disabled={!isEdited} // Поля ввода блокируются при !isEdited
+                    name="description"
                     id="textArea01"
-                    readOnly=""
                     placeholder="Введите описание задачи..."
-                    defaultValue={""}
                   />
-                </S.PopBrowseBlock>
+                </S.FormBrowseBlock>
               </S.PopBrowseForm>
               <Calendar selected={selected} setSelected={setSelected} />
             </S.PopBrowseWrap>
-            <S.PopBrowseBtnBrowse>
-        
-            </S.PopBrowseBtnBrowse>
             <S.PopBrowseBtnEdit>
+              {error && <p style={{ color: "red" }}>{error}</p>}
               <S.BtnGroup>
-                <S.BtnBg>
-                  <a>Сохранить</a>
-                </S.BtnBg>
-                <S.BtnBor>
-                  <a href="#">Отменить</a>
-                </S.BtnBor>
+                {!isEdited && ( // Показываем кнопку "Редактировать задачу" только если !isEdited
+                  <S.BtnBg onClick={() => setIsEdited(true)}>Редактировать задачу</S.BtnBg>
+                )}
+                {isEdited && ( // Показываем кнопку "Сохранить" только если isEdited
+                  <S.BtnBg onClick={editedTask}>Сохранить</S.BtnBg>
+                )}
+                <S.BtnBor onClick={() => setIsEdited(false)}>Отменить</S.BtnBor>
                 <S.BtnBor>
                   <a href="#">Удалить задачу</a>
                 </S.BtnBor>

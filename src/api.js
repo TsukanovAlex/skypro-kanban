@@ -63,3 +63,33 @@ export async function postTodos({ title, topic, description, date, token }) {
   const data = await response.json();
   return data;
 }
+
+export async function editTodo({
+  title,
+  status,
+  topic,
+  description,
+  date,
+  id,
+  token,
+}) {
+  const response = await fetch(`https://wedev-api.sky.pro/api/kanban/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      title,
+      topic,
+      description,
+      date,
+      status,
+    }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+  const data = await response.json();
+  return data;
+}

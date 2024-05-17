@@ -32,3 +32,18 @@ export const paths = {
   NEW_CARD: "/new-card",
   NOT_FOUND: "*",
 };
+
+
+export const topicHeader = {
+  "Web Design": "_orange",
+  "Research": "_green",
+  "Copywriting": "_purple",
+};
+
+export const status = [
+  "Без статуса",
+  "Нужно сделать",
+  "В работе",
+  "Тестирование",
+  "Готово",
+];
