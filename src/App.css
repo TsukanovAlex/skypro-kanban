@@ -24,6 +24,7 @@
 .pop-new-card:target,
 .pop-browse:target {
   display: block;
+  
 }
 
 
