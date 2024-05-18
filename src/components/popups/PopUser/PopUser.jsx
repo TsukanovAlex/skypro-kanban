@@ -11,10 +11,6 @@ function PopUser() {
       <S.PopUserSet>
         <S.PopUserSetName>{user.name}</S.PopUserSetName>
         <S.PopUserSetMail>{user.login}</S.PopUserSetMail>
-        <S.PopUserSetTheme>
-          <p>Темная тема</p>
-          <S.CheckboxInput type="checkbox" />
-        </S.PopUserSetTheme>
         <S.PopUserSetButton>
           <Link to={paths.EXIT}>Выйти</Link>
         </S.PopUserSetButton>

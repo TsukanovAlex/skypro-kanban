@@ -11,20 +11,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import NewCardPage from "../pages/NewCardPage";
 
 export const AppRoutes = () => {
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  // const navigate = useNavigate();
 
-  // function userLogin(newUser) {
-  //   localStorage.setItem("user", JSON.stringify(newUser));
-  //   setUser(newUser);
-  //   navigate(paths.MAIN);
-  // }
-
-  // function userExit() {
-  //   setUser(null);
-  //   localStorage.removeItem("user");
-  //   navigate(paths.LOGIN);
-  // }
   return (
     <Routes>
       <Route path={paths.MAIN} element={<PrivateRoutes />}>

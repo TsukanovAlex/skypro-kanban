@@ -37,13 +37,13 @@ function Header() {
           </S.HeaderLogoDark>
           <S.HeaderNav>
             <S.HeaderBtn onClick={openNewCard}>Создать новую задачу</S.HeaderBtn>
-            <a
+            <S.HeaderUserLink
               onClick={openUser}
               href="#user-set-target"
               className="header__user _hover02"
             >
               {user.name}
-            </a>
+            </S.HeaderUserLink>
           </S.HeaderNav>
         </S.HeaderBlock>
       </Container>
