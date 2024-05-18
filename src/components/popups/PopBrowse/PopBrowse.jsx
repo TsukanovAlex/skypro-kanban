@@ -4,7 +4,7 @@ import Calendar from "../../calendar/Calendar";
 import * as S from "./popBrowse.styled";
 import { useState, useEffect } from "react";
 import { useUserContext } from "../../../context/hooks/useUser";
-import { editTodo } from "../../../api";
+import { deleteTodo, editTodo } from "../../../api";
 import { useTaskContext } from "../../../context/hooks/useTasks";
 
 function PopBrowse() {
@@ -64,6 +64,18 @@ function PopBrowse() {
         setError(err.message);
       });
   };
+
+  function deleteTask(e) {
+    e.preventDefault();
+    deleteTodo({ token: user?.token, id })
+      .then((responseData) => {
+        setTaskList(responseData.tasks);
+        navigate(paths.MAIN);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }
 
   return (
     <S.PopBrowse>
@@ -128,7 +140,7 @@ function PopBrowse() {
                 <S.BtnBor onClick={() => setIsEdited(false)}>Отменить</S.BtnBor>
               )}
                 <S.BtnBor>
-                  <a href="#">Удалить задачу</a>
+                  <a onClick={deleteTask}>Удалить задачу</a>
                 </S.BtnBor>
               </S.BtnGroup>
               <S.BtnBg>
