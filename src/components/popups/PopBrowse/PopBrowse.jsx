@@ -61,6 +61,7 @@ function PopBrowse() {
       status: statusCard,
       description: editTask.description,
       topic: editTask.topic,
+      date: selected
     };
 
 

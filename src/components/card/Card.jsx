@@ -66,7 +66,7 @@ function Card({ card }) {
                 </clipPath>
               </defs>
             </svg>
-            <p>{format(date, "PP, HH:mm", { locale: ru })}</p>
+            <p>{format(date, "PP", { locale: ru })}</p>
           </S.CardDate>
         </S.CardContent>
       </S.CardsCard>
