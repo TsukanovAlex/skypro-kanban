@@ -53,8 +53,8 @@ function PopBrowse() {
       description: editTask.description,
       topic: editTask.topic,
     };
-  
-  
+
+
     editTodo(requestData)
       .then((responseData) => {
         setTaskList(responseData.tasks);
@@ -93,7 +93,7 @@ function PopBrowse() {
               <S.StatusThemes>
                 {status.map((item, index) => (
                   <S.StatusTheme
-                    onClick={() => setStatusCard(item)}
+                    onClick={() => isEdited && setStatusCard(item)}
                     key={index}
                     style={statusCard === item ? { backgroundColor: "#94a6be", color: "#ffffff" } : {}}
                   >
@@ -104,6 +104,7 @@ function PopBrowse() {
                       name="status"
                       value={item}
                       checked={statusCard === item}
+                      disabled={!isEdited}
                     />
                   </S.StatusTheme>
                 ))}
@@ -125,7 +126,7 @@ function PopBrowse() {
                   />
                 </S.FormBrowseBlock>
               </S.PopBrowseForm>
-              <Calendar selected={selected} setSelected={setSelected} />
+              <Calendar selected={selected} setSelected={setSelected} isEdited={isEdited} />
             </S.PopBrowseWrap>
             <S.PopBrowseBtnEdit>
               {error && <p style={{ color: "red" }}>{error}</p>}
