@@ -17,6 +17,13 @@ function PopBrowse() {
   const [error, setError] = useState(null);
   const [isEdited, setIsEdited] = useState(false);
   const [statusCard, setStatusCard] = useState("");
+  const [initialTask, setInitialTask] = useState({
+    title: "",
+    description: "",
+    topic: "",
+    date: "",
+    status: "",
+  });
   const [editTask, setEditTask] = useState({
     title: "",
     description: "",
@@ -28,13 +35,15 @@ function PopBrowse() {
   useEffect(() => {
     const card = taskList.find((item) => item._id === id);
     if (card) {
-      setEditTask({
+      const taskData = {
         title: card.title,
         description: card.description,
         topic: card.topic,
         date: card.date,
         status: card.status,
-      });
+      };
+      setEditTask(taskData);
+      setInitialTask(taskData);
       setStatusCard(card.status);
     }
   }, [id, taskList]);
@@ -63,6 +72,12 @@ function PopBrowse() {
       .catch((err) => {
         setError(err.message);
       });
+  };
+
+  const cancelEditing = () => {
+    setEditTask(initialTask);
+    setStatusCard(initialTask.status);
+    setIsEdited(false);
   };
 
   function deleteTask(e) {
@@ -131,15 +146,15 @@ function PopBrowse() {
             <S.PopBrowseBtnEdit>
               {error && <p style={{ color: "red" }}>{error}</p>}
               <S.BtnGroup>
-                {!isEdited && ( 
+                {!isEdited && (
                   <S.BtnBg onClick={() => setIsEdited(true)}>Редактировать задачу</S.BtnBg>
                 )}
-                {isEdited && ( 
+                {isEdited && (
                   <S.BtnBg onClick={editedTask}>Сохранить</S.BtnBg>
                 )}
-                {isEdited && ( 
-                <S.BtnBor onClick={() => setIsEdited(false)}>Отменить</S.BtnBor>
-              )}
+                {isEdited && (
+                  <S.BtnBor onClick={cancelEditing}>Отменить</S.BtnBor>
+                )}
                 <S.BtnBor>
                   <a onClick={deleteTask}>Удалить задачу</a>
                 </S.BtnBor>
