@@ -76,7 +76,7 @@ function PopNewCard() {
                   />
                 </S.FormNewBlock>
               </S.PopNewCardForm>
-              <Calendar selected={selected} setSelected={setSelected} />
+              <Calendar selected={selected} setSelected={setSelected} isEdited={true}/>
             </S.popNewCardWrap>
             <S.Categories>
               <S.SubTtl>
