@@ -40,6 +40,9 @@ export const HeaderLogo = styled.div`
     width: 85px;
   }
 `;
+export const HeaderUserLink = styled.a`
+color: #565EEF;
+`
 export const HeaderNav = styled.nav`
   max-width: 290px;
   padding: 0;

@@ -77,6 +77,7 @@ export const CheckboxInput = styled.input`
 
  export const PopUserSetButton = styled.button`
  width: 72px;
+ margin-top: 10px;
   height: 30px;
   background: transparent;
   color: #565eef;

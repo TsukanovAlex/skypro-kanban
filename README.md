@@ -1,8 +1,17 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1) Логика работы приложения соответствует описанию использования, который приложен в макете в Figma.
+2) Внешний вид приложения полностью соответствует макету, стилизация выполнена с помощью Styled Components. В проекте не должно быть css-файлов.
+3) Для всех файлов применено форматирование, отсутствуют ошибки и предупреждения линтера.
+4) Корректно реализована логика работа с api, работает индикатор загрузки, ошибки обрабатываются и выводятся пользователю.
+5) Приложение работает без ошибок в консоли.
+6) Оформлен файл Readme, в него добавлен чек-лист приемочного тестирования.
+7) Реализовано сохранение данных о пользователе в Lockal Storage
+8) Переходы между страницами выполяются без перезагрузки страницы.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Возможности приложения:
+1) Я как незарегистрированный пользователь могу только получить доступ к страницам авторизации и регистрации.
+2) После авторизации я могу: 
+а) создавать задачи;
+б) редактировать задчачи;
+в) удалять задачи;

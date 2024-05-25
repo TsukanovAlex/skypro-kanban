@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Hover01 } from "../../../styles/shared.styled";
+import { topicStyles } from "../../../lib/topic";
 
 export const PopNewCard = styled.div`
 display: block;
@@ -258,30 +259,10 @@ export const Categories = styled.div`
   margin-bottom: 20px;
 `;
 
-export const CategoriesThemes = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
 export const CategoriesP = styled.p`
   margin-bottom: 14px;
 `;
-export const CategoriesTheme = styled.div`
-  display: inline-block;
-  width: auto;
-  height: 30px;
-  padding: 8px 20px;
-  border-radius: 24px;
-  margin-right: 7px;
-  opacity: 0.4;
-  & p {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 14px;
-    white-space: nowrap;
-  }
-`;
+
 export const BtnFormNewCreate = styled.button`
 width: 132px;
 height: 30px;
@@ -296,4 +277,43 @@ color: #ffffff;
 float: right;
   ${Hover01}
 `;
-// export const Categories = styled.div``;
+
+// стили Радио
+export const CategoriesThemes = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  input[type="radio"] {
+    display: none;
+  }
+`;
+export const CategoriesTheme = styled.label`
+  display: inline-block;
+  width: auto;
+  height: 30px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  margin-right: 7px;
+  opacity: 0.4;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  white-space: nowrap;
+  color: ${({ $topicColor }) => topicStyles[$topicColor]?.color || "#06b16e"};
+  background-color: ${({ $topicColor }) =>
+    topicStyles[$topicColor]?.backgroundColor || "#b4fdd1"};
+`;
+
+export const Orange = styled.p`
+  background-color: #ffe4c2;
+  color: #ff6d00;
+`;
+export const Green = styled.p`
+  background-color: #b4fdd1;
+  color: #06b16e;
+`;
+export const Purple = styled.p`
+  background-color: #e9d4ff;
+  color: #9a48f1;
+`;
